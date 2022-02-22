@@ -46,7 +46,7 @@ export default function Map({ player, tiles, tileset, setTiles, activeTile, size
             style={{ 
                 position : "relative",
                 boxSizing : "border-box",
-                backgroundColor : "#FFF",
+                background : "#FFF",
                 width : size.width,
                 height : size.height
             }}
@@ -58,7 +58,7 @@ export default function Map({ player, tiles, tileset, setTiles, activeTile, size
                             key={x}
                             onClick={() => dropTile({ x, y })}
                             style={{ 
-                                background : `url(/images/sprites/${tileset}.png) -${tile.v.x}px -${tile.v.y}px no-repeat`,
+                                background : `url(/images/sprites/${tileset}.gif) -${tile.v.x}px -${tile.v.y}px no-repeat`,
                                 width : 32,
                                 height : 32
                             }}

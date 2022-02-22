@@ -33,7 +33,7 @@ export default function TilePallete({ isShowing, setIsShowing, tileset, size, po
             <div style={{ width : "100%", display : "flex" }}>
                 <div
                     style={{ 
-                        background : `url(/images/sprites/${tileset}.png) -${activeTile.x}px -${activeTile.y}px no-repeat`,
+                        background : `url(/images/sprites/${tileset}.gif) -${activeTile.x}px -${activeTile.y}px no-repeat`,
                         width : 32,
                         height : 32
                     }}
@@ -55,7 +55,7 @@ export default function TilePallete({ isShowing, setIsShowing, tileset, size, po
                             style={{ 
                                 borderTop : "1px solid #000",
                                 borderRight : "1px solid #000",
-                                background : `url(/images/sprites/${tileset}.png) -${x * 32}px -${y * 32}px no-repeat`,
+                                background : `url(/images/sprites/${tileset}.gif) -${x * 32}px -${y * 32}px no-repeat`,
                                 width : 32,
                                 height : 32
                             }}
