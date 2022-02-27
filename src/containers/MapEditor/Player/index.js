@@ -2,8 +2,8 @@ import React from "react"
 
 import Actor from '../Actor'
 
-import useKeyPress from "../../hooks/use-key-press"
-import useWalk from "../../hooks/use-walk"
+import useKeyPress from "../../../hooks/MapEditor/Player/use-key-press"
+import useWalk  from "../../../hooks/MapEditor/Player/use-walk"
 
 export default function Player({ skin, tiles }) {
     const { dir, step, walk, position } = useWalk(3)

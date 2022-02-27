@@ -67,22 +67,22 @@ export default function useWalk(maxSteps) {
 
             switch(dir) {
                 case "down":
-                    if (destTile && destTile.v && destTile.v.walkable && !destTile.v.walkable.top) {
+                    if (destTile && destTile.v && destTile.v.w && !destTile.v.w.top) {
                         canMove = false
                     }
                     break
                 case "right":
-                    if (destTile && destTile.v && destTile.v.walkable && !destTile.v.walkable.left) {
+                    if (destTile && destTile.v && destTile.v.w && !destTile.v.w.left) {
                         canMove = false
                     }
                     break
                 case "up":
-                    if (destTile && destTile.v && destTile.v.walkable && !destTile.v.walkable.bottom) {
+                    if (destTile && destTile.v && destTile.v.w && !destTile.v.w.bottom) {
                         canMove = false
                     }
                     break
                 case "left":
-                    if (destTile && destTile.v && destTile.v.walkable && !destTile.v.walkable.right) {
+                    if (destTile && destTile.v && destTile.v.w && !destTile.v.w.right) {
                         canMove = false
                     }
                     break

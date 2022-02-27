@@ -1,8 +1,12 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
+
+import styled from "styled-components"
 
 import Player from "../Player"
 
-export default function Map({ player, tiles, tileset, setTiles, activeTile, size }) {
+function Map({ player, tiles, setTiles, activeTile, size }) {
+    const [isMouseDown, setIsMouseDown] = useState(false)
+
     useEffect(() => {
         const cam = document.getElementById("pnl-camera")
         const map = document.getElementById("pnl-map")
@@ -11,7 +15,7 @@ export default function Map({ player, tiles, tileset, setTiles, activeTile, size
 
         map.style.marginLeft = `${((parseInt(camStyle.width) - parseInt(mapStyle.width)) / 2)}px`
         map.style.marginTop = `${((parseInt(camStyle.height) - parseInt(mapStyle.height)) / 2)}px`
-    }, [])
+    }, [size])
 
 
     function cloneMatrix(m) {
@@ -25,6 +29,10 @@ export default function Map({ player, tiles, tileset, setTiles, activeTile, size
     }
 
     function dropTile({ x, y }) {
+        if (!activeTile) {
+            return;
+        }
+
         setTiles(prev => {
             const clone = cloneMatrix(prev)
             const tile = {
@@ -36,17 +44,12 @@ export default function Map({ player, tiles, tileset, setTiles, activeTile, size
 
             return clone
         })
-
-        console.log(tiles)
     }
 
     return (
-        <div
+        <Container
             id="pnl-map"
             style={{ 
-                position : "relative",
-                boxSizing : "border-box",
-                background : "#FFF",
                 width : size.width,
                 height : size.height
             }}
@@ -57,8 +60,15 @@ export default function Map({ player, tiles, tileset, setTiles, activeTile, size
                         <div
                             key={x}
                             onClick={() => dropTile({ x, y })}
+                            onMouseEnter={() => {if (isMouseDown) dropTile({ x, y })}}
+                            onMouseDown={() => setIsMouseDown(true)}
+                            onMouseUp={() => setIsMouseDown(false)}
                             style={{ 
-                                background : `url(/images/sprites/${tileset}.gif) -${tile.v.x}px -${tile.v.y}px no-repeat`,
+                                background : `url(/images/sprites/${tile.v.t}) -${tile.v.x}px -${tile.v.y}px no-repeat`,
+                                borderTop : tile.v.w && tile.v.w.top ? "none" : "1px solid #595959",
+                                borderRight : tile.v.w && tile.v.w.right ? "none" : "1px solid #595959",
+                                borderBottom : tile.v.w && tile.v.w.bottom ? "none" : "1px solid #595959",
+                                borderLeft : tile.v.w && tile.v.w.left ? "none" : "1px solid #595959",
                                 width : 32,
                                 height : 32
                             }}
@@ -67,6 +77,14 @@ export default function Map({ player, tiles, tileset, setTiles, activeTile, size
                 </div>
             )}
             { player && <Player tiles={tiles} skin={player.skin} /> }
-        </div>
+        </Container>
     )
 }
+
+export default Map
+
+const Container = styled.div`
+  position: relative;
+  box-sizeing: border-box;
+  background-color: #FFF;
+`
